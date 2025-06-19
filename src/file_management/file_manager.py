@@ -660,15 +660,6 @@ class FileManager:
 
         return file_lists
 
-        # Validate required files
-        required_files = ["device_config.sv", "pcileech_top.sv"]
-        manifest["validation"]["required_files_present"] = all(
-            f.lower() in [file.lower() for file in manifest["files"]["systemverilog"]]
-            for f in required_files
-        )
-
-        return manifest
-
     def print_final_output_info(self, validation_results: Dict[str, Any]):
         """Print detailed information about final output files."""
         logger.info("=" * 80)
