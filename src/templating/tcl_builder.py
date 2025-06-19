@@ -866,6 +866,30 @@ class TCLBuilder:
         return saved_files
 
 
+def generate_tcl_scripts(
+    board: str,
+    output_dir: str,
+    fpga_part: str,
+    vendor_id: Optional[int] = None,
+    device_id: Optional[int] = None,
+    revision_id: Optional[int] = None,
+    source_files: Optional[List[str]] = None,
+    constraint_files: Optional[List[str]] = None,
+) -> Dict[str, bool]:
+    """Convenience wrapper to quickly generate TCL scripts."""
+
+    builder = TCLBuilder(output_dir=output_dir)
+    return builder.build_all_tcl_scripts(
+        board=board,
+        fpga_part=fpga_part,
+        vendor_id=vendor_id,
+        device_id=device_id,
+        revision_id=revision_id,
+        source_files=source_files,
+        constraint_files=constraint_files,
+    )
+
+
 # Backward compatibility aliases
 def create_tcl_builder(*args, **kwargs) -> TCLBuilder:
     """Factory function for creating TCL builder instances."""
@@ -882,4 +906,5 @@ __all__ = [
     "DeviceConfigError",
     "XDCConstraintError",
     "create_tcl_builder",
+    "generate_tcl_scripts",
 ]
